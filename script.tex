@@ -1,0 +1,67 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Doomsday-algoritmen}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Finne dommedagen i et år}
+For å finne ut når dommedagen (Halloween) er i et år, gjør vi et overraskende enkelt regnestykke. Alt vi egentlig trenger er å vite hvilken ukedag Halloween var på i 2000, som var en tirsdag. Som dere kanskje vet så forflyttes ukedagen for en dato med en dag for hvert år som går, men 2 dager dersom det er et skuddår. Først gjør vi om ukedagene til tall: søndag = 0, mandag = 1, ..., lørdag = 6. Deretter legger vi på differansen mellom årene og en ekstra dag for hvert skuddår. Om vi skal regne ut dommedagen for 2020, har vi følgende regnestykke:
+\begin{align*}
+    \text{Halloween i 2020} &= \text{Halloween i 2000} + \text{differanse i år} + \text{skuddår} \\
+    &= 2 + 20 + \left\lfloor \frac{20}{4} \right\rfloor \\
+    &= 2 + 20 + 5 \\
+    &= 27 \\
+    &\equiv 6 (\text{mod } 7) 
+\end{align*}
+
+På slutten av regnestykket gjør vi noe som heter modulo-regning, også kalt klokkearitmetikk. Det betyr at vi ser på resten etter å ha delt på 7. Siden $27 = 3 \cdot 7 + 6$, er $27 \equiv 6 (\text{mod } 7)$. 
+
+Om vi ønsker å finne dommedagen for et hvilket som helst annet år, må vi kunne litt flere utgangspunkt enn bare at Halloween i 2000 var en tirsdag. Da kan vi bruke denne tabellen:
+\begin{center}
+\begin{tabular}{c c}
+    ... & \\
+    1700: & 0 \\
+    1800: & 5 \\
+    1900: & 3 \\
+    2000: & 2 \\
+    2100: & 0 \\
+    ... & \\   
+\end{tabular}
+\end{center}
+I tillegg, kan vi bruke 12-gangen til å dele opp hvert århundre:
+\begin{center}
+    \begin{tabular}{c c c c c c c c}
+        12 & 24 & 36 & 48 & 60 & 72 & 84 & 96 \\
+        1 & 2 & 3 & 4 & 5 & 6 & 7 & 8
+    \end{tabular}
+\end{center}
+For å finne ut ukedagen til Halloween i 1988, kan vi gjøre følgende regnestykke:
+\begin{align*}
+    \text{Halloween i 1988} &= \text{Halloween i 1900} + \text{Halloween i 1984} + \text{differanse i år} + \text{skuddår} \\
+    &= 3 + 7 + (88-84) + \left\lfloor \frac{4}{4} \right\rfloor \\
+    &= 3 + 7 + 4 + 1 \\
+    &= 15 \\
+    &\equiv 1 (\text{mod } 7)
+\end{align*}
+Dermed var Halloween i 1988 en mandag.
+\subsection*{Test deg selv}
+Oppgaver kommer her
+
+
+\section{Finne en hvilken som helst annen dag}
+For å finne ut hvilken ukedag en hvilken som helst annen dato er, bruker vi det som heter doomsday-algoritmen. Denne algoritmen er basert på at det er noen spesielle datoer som alltid har samme ukedag, uavhengig av hvilket år det er. Disse datoene er 4/4, 6/6, 8/8, 10/10, 12/12, 5/9, 9/5, 7/11, 11/7, 14/3 og selvfølgelig Halloween. I tillegg har vi datoene 3/1 og 28/2 for vanlige år, og 4/1 og 29/2 for skuddår. Det eneste du mangler for å kunne finne ukedagen til en hvilken som helst dato, er å regne ut differansen mellom datoen og en av disse spesialdatoene. For eksempel, la oss finne ukedagen til 17/5 i 2020. Vi fant ut i sted at Halloween i 2020 var en lørdag, dermed vet vi at alle dommedagene i 2020 var på en lørdag. Nærmeste dommedag til 17/5 er 9/5, da har vi 6 (lørdag) + 8 (differanse i dager) = 14, som blir 0 (søndag) etter å ha tatt resten av 7. Dermed var 17/5 en søndag i 2020.
+
+\subsection*{Test deg selv}
+Oppgaver kommer her
+
+\end{document}
